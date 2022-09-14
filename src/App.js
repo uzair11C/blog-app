@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { CurrentUser } from './contexts/currentUserContext'
+import {
+  Routes,
+  Route,
+  useNavigate 
+} from "react-router-dom";
+import Dashboard from "./components/dashboard";
+import Login from "./components/login"
 
-function App() {
+function App() 
+{
+  let navigate = useNavigate()
+  const [currentUser, setCurrentUser] = useContext(CurrentUser)
+
+  useEffect(
+    () => {
+      currentUser.id === null
+      ?
+      navigate('/login',{replace:true})
+      :
+      navigate('/',{replace:true})
+    },[currentUser.id])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route exact path='/login' element={<Login />} /> 
+        <Route path='/' exact element={<Dashboard />} />
+      </Routes>
     </div>
   );
 }
