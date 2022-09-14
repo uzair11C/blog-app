@@ -1,4 +1,4 @@
-import React, {useContext,useState,useEffect} from 'react'
+import React, {useContext} from 'react'
 import { Container, Paper, Typography, Button, Stack } from '@mui/material'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -53,11 +53,9 @@ const Login = () =>
         })
     }
 
-    console.log(users)
-
     return(
     <Container maxWidth='lg' sx={{display:'flex',justifyContent:'center',alignItems:'center',height:'100vh'}}>
-        <Paper sx={{width:'400px',height:'400px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'20px',backgroundColor:'#878dfa'}}>
+        <Paper sx={{borderRadius:'20px',width:'400px',height:'400px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'20px',backgroundColor:'#878dfa'}}>
             <Typography variant='h2' component='div' sx={{textAlign:'left',mb:'10px'}}>
                 Login
             </Typography>
