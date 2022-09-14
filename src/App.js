@@ -19,14 +19,14 @@ function App()
       ?
       navigate('/login',{replace:true})
       :
-      navigate('/',{replace:true})
+      navigate('/dashboard',{replace:true})
     },[currentUser.id])
 
   return (
     <div>
       <Routes>
         <Route exact path='/login' element={<Login />} /> 
-        <Route path='/' exact element={<Dashboard />} />
+        <Route path='/dashboard' exact element={<Dashboard />} />
       </Routes>
     </div>
   );
