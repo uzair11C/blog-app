@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { 
     AppBar, 
     Box, 
@@ -10,9 +10,12 @@ import {
     MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from 'react-router-dom'
+import { CurrentUser } from '../contexts/currentUserContext'
 
 const Appbar = () => 
 {
+  const [currentUser, setCurrentUser] = useContext(CurrentUser)
+
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -23,6 +26,8 @@ const Appbar = () =>
     setAnchorElNav(null);
   };
 
+  console.log(currentUser)
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -32,8 +37,7 @@ const Appbar = () =>
                 component="div"
                 noWrap
                 sx={{
-                mr: 2,
-                pr: 2,
+                pr: 6,
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
                 fontWeight: 700,
@@ -129,6 +133,11 @@ const Appbar = () =>
               >
                 <Link to='/contact'>Contact</Link>
               </Typography>
+          </Box>
+          <Box sx={{pr:2,whiteSpace:'nowrap'}}>
+            <Typography variant='h5' component='div'>
+                {currentUser.name}
+            </Typography>
           </Box>
         </Toolbar>
       </Container>
