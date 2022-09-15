@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Dashboard from "./components/dashboard";
 import Login from "./components/login"
+import MyPostsPage from './components/myPostsPage'
 
 function App() 
 {
@@ -17,16 +18,17 @@ function App()
     () => {
       currentUser.id === null
       ?
-      navigate('/login',{replace:true})
+      navigate('/login')
       :
-      navigate('/dashboard',{replace:true})
+      navigate('/dashboard')
     },[currentUser.id])
 
   return (
     <div>
       <Routes>
         <Route exact path='/login' element={<Login />} /> 
-        <Route path='/dashboard' exact element={<Dashboard />} />
+        <Route exact path='/dashboard' element={<Dashboard />} />
+        <Route exact path='/user/posts/:id' element={<MyPostsPage />} />
       </Routes>
     </div>
   );
