@@ -1,13 +1,14 @@
 import { useState, useContext } from 'react';
 import { 
-    AppBar, 
-    Box, 
-    Toolbar, 
-    IconButton, 
-    Typography, 
-    Menu, 
-    Container, 
-    MenuItem } from '@mui/material'
+  Button,
+  AppBar, 
+  Box, 
+  Toolbar, 
+  IconButton, 
+  Typography, 
+  Menu, 
+  Container, 
+  MenuItem } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import {Link} from 'react-router-dom'
 import { CurrentUser } from '../contexts/currentUserContext'
@@ -78,18 +79,35 @@ const Appbar = () =>
               }}
             >
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography variant='body1' textAlign="center">
-                    <Link style={{textDecoration:'none'}} to='/'>Home</Link>
+                  <Typography variant='body1' textAlign="center"
+                    sx={{textDecoration:'none'}}
+                  >
+                    <Link 
+                      className='link'
+                      style={{ color: 'inherit', textDecoration: 'none'}} 
+                      to='/dashboard'
+                    >
+                      Dashboard
+                    </Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography variant='body1' sx={{textDecoration:'none'}} textAlign="center">
-                    <Link to='/about'>About</Link>
+                    <Link 
+                      style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                      to={`/user/${currentUser.id}`}
+                    >
+                      My Posts
+                    </Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography variant='body1' sx={{textDecoration:'none'}} textAlign="center">
-                    <Link to='/contact'>Contact</Link>
+                    <Link 
+                      to='/contact'
+                    >
+                      Contact
+                    </Link>
                   </Typography>
                 </MenuItem>
             </Menu>
@@ -117,21 +135,36 @@ const Appbar = () =>
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', margin:'10px', textDecoration:'none' }}
               >
-                <Link to='/'>Home</Link>
+                <Link 
+                  className='link'
+                  style={{ color: 'inherit', textDecoration: 'none'}} 
+                  to='/dashboard'
+                >
+                  Dashboard
+                </Link>
               </Typography>
               <Typography
                 variant='h5' component='h5'
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block', margin:'10px', textDecoration:'none' }}
               >
-                <Link to='/about'>About</Link>
+                <Link 
+                  style={{ color: 'inherit', textDecoration: 'inherit'}} 
+                  to={`/user/posts/${currentUser.id}`}
+                >
+                  My Posts
+                </Link>
               </Typography>
               <Typography
                 variant='h5' component='h5' 
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block',margin:'10px', textDecoration:'none' }}
               >
-                <Link to='/contact'>Contact</Link>
+                <Link 
+                  to='/contact'
+                >
+                  Contact
+                </Link>
               </Typography>
           </Box>
           <Box sx={{pr:2,whiteSpace:'nowrap'}}>
@@ -139,6 +172,17 @@ const Appbar = () =>
                 {currentUser.name}
             </Typography>
           </Box>
+          <Button
+            variant='contained'
+            color='error'
+            onClick={() => {setCurrentUser({
+              id: null,
+              name: '',
+              email: '',
+              })}}
+          >
+            Logout
+          </Button>
         </Toolbar>
       </Container>
     </AppBar>
