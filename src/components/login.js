@@ -26,7 +26,6 @@ const Login = () =>
             ),
             onSubmit: (values) =>
             {
-                console.log(values)
                 submitHandler()
             }
         }
