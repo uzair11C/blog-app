@@ -48,6 +48,7 @@ const PostsComp = () =>
                         posts&&posts.map((post) => 
                         (
                             <Typography 
+                                key={post.id}
                                 variant='h6'
                                 component='div'
                                 sx={{
