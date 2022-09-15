@@ -150,12 +150,12 @@ const Appbar = () =>
               >
                 <Link 
                   style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                  to={`/user/posts/${currentUser.id}`}
+                  to={`user/${currentUser.id}`}
                 >
                   My Posts
                 </Link>
               </Typography>
-              <Typography
+              {/* <Typography
                 variant='h5' component='h5' 
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block',margin:'10px', textDecoration:'none' }}
@@ -165,7 +165,7 @@ const Appbar = () =>
                 >
                   Contact
                 </Link>
-              </Typography>
+              </Typography> */}
           </Box>
           <Box sx={{pr:2,whiteSpace:'nowrap'}}>
             <Typography variant='h5' component='div'>
