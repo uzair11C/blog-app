@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Stack, Divider, Typography, Card,Box } from '@mui/material'
 import { AllPosts } from '../contexts/allPostsContext'
+import { Link } from 'react-router-dom'
 
 const PostsComp = () => 
 {
-
     const posts = useContext(AllPosts)
 
     return(
@@ -52,10 +52,19 @@ const PostsComp = () =>
                                 variant='h6'
                                 component='div'
                                 sx={{
-                                    letterSpacing: '0.1rem'
+                                    letterSpacing: '0.1rem',
+                                    textDecoration:'none',
+                                    '&:hover':{
+                                        color:'green',
+                                        transition:'0.3s ease-in-out'
+                                    }
                                 }}
                             >
-                                &#10148;  {post.title} &#10140;
+                                <Link
+                                    to={`/post/${post.id}`}
+                                >
+                                    &#10148;  {post.title} &#10140;
+                                </Link>
                             </Typography>
                         ))
                     }
