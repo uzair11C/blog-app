@@ -8,6 +8,7 @@ import {
 import Dashboard from "./components/dashboard";
 import Login from "./components/login"
 import MyPostsPage from './components/myPostsPage'
+import BlogPage from './components/blogPage'
 
 function App() 
 {
@@ -18,9 +19,9 @@ function App()
     () => {
       currentUser.id === null
       ?
-      navigate('/login')
+      navigate('/login',{replace:'true'})
       :
-      navigate('/dashboard')
+      navigate('/dashboard',{replace:'true'})
     },[currentUser.id])
 
   return (
@@ -29,6 +30,7 @@ function App()
         <Route exact path='/login' element={<Login />} /> 
         <Route exact path='/dashboard' element={<Dashboard />} />
         <Route exact path='/user/posts/:id' element={<MyPostsPage />} />
+        <Route exact path='/post/:id' element={<BlogPage />} />
       </Routes>
     </div>
   );
