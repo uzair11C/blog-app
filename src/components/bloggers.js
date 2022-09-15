@@ -50,7 +50,7 @@ const Bloggers = () =>
                         {
                             users&&users.map((user) => 
                             (
-                                <Typography variant='h6' component='div'>
+                                <Typography key={user.id} variant='h6' component='div'>
                                     {user.name}
                                 </Typography >
                             ))
