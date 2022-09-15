@@ -54,7 +54,7 @@ const Login = () =>
 
     return(
     <Container maxWidth='lg' sx={{display:'flex',justifyContent:'center',alignItems:'center',height:'100vh'}}>
-        <Paper sx={{borderRadius:'20px',width:'400px',height:'400px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'20px',backgroundColor:'#878dfa'}}>
+        <Paper sx={{borderRadius:'20px',width:'300px',height:'400px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',padding:'20px',backgroundColor:'#878dfa'}}>
             <Typography variant='h2' component='div' sx={{textAlign:'left',mb:'10px'}}>
                 Login
             </Typography>
