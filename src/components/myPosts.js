@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
-import { Stack, Divider, Typography, Card,Box } from '@mui/material'
+import { Stack, Divider, Typography, Card, Box, IconButton } from '@mui/material'
 import { AllPosts } from '../contexts/allPostsContext'
 import { CurrentUser } from '../contexts/currentUserContext'
+import { Link } from 'react-router-dom'
+import DeleteIcon from '@mui/icons-material/Delete';
+import axios from 'axios'
 
 const MyPosts = () => 
 {
@@ -11,7 +14,12 @@ const MyPosts = () =>
 
     const myPosts = posts.filter(post => post.userId === currentUser.id)
 
-    console.log(myPosts)
+    const deletePost = (id) =>
+    {
+        axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(
+            alert(`Post ${id} deleted successfully!`))
+    }
 
     return(
         <Card
@@ -54,13 +62,33 @@ const MyPosts = () =>
                         myPosts&&myPosts.map((post) => 
                         (
                             <Typography 
+                                key={post.id}
                                 variant='h6'
                                 component='div'
                                 sx={{
                                     letterSpacing: '0.1rem'
                                 }}
                             >
-                                &#10148;  {post.title} &#10140;
+                                <Stack
+                                    direction='row'
+                                    spacing={3}
+                                    justifyContent='space-between'
+                                    alignItems='center'
+                                >
+                                    <Link 
+                                        to={`/user/posts/${post.id}`}
+                                    >
+                                        &#10148;  {post.title} &#10140;
+                                    </Link>
+                                    <IconButton 
+                                        aria-label="delete" 
+                                        size="large"
+                                        color='error'
+                                        onClick={() => { deletePost(post.id) }}
+                                    >
+                                        <DeleteIcon fontSize="medium" />
+                                    </IconButton>
+                                </Stack>
                             </Typography>
                         ))
                     }
