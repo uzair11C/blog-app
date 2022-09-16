@@ -148,7 +148,7 @@ const Appbar = () =>
               >
                 <Link 
                   style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                  to={`/user/posts/${currentUser.id}`}
+                  to={`/user/posts`}
                 >
                   My Posts
                 </Link>
