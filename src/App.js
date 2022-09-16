@@ -13,7 +13,7 @@ import CreatePost from "./components/createPost";
 
 function App() 
 {
-  let navigate = useNavigate()
+  const navigate = useNavigate()
   const [currentUser, setCurrentUser] = useContext(CurrentUser)
 
   useEffect(
