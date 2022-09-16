@@ -29,8 +29,9 @@ function App()
       <Routes>
         <Route exact path='/login' element={<Login />} /> 
         <Route exact path='/dashboard' element={<Dashboard />} />
-        <Route exact path='/user/posts/:id' element={<MyPostsPage />} />
+        <Route exact path='/user/posts' element={<MyPostsPage />} />
         <Route exact path='/post/:id' element={<BlogPage />} />
+        <Route exact path='/user/posts/:id' element={<BlogPage />} />
       </Routes>
     </div>
   );
