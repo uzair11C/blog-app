@@ -24,7 +24,7 @@ const Login = () =>
                     email: Yup.string().email('Invalid Email').required('Required'),
                 }
             ),
-            onSubmit: (values) =>
+            onSubmit: () =>
             {
                 submitHandler()
             }
