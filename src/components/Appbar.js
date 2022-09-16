@@ -27,8 +27,6 @@ const Appbar = () =>
     setAnchorElNav(null);
   };
 
-  console.log(currentUser)
-
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -95,20 +93,20 @@ const Appbar = () =>
                   <Typography variant='body1' sx={{textDecoration:'none'}} textAlign="center">
                     <Link 
                       style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                      to={`/user/${currentUser.id}`}
+                      to={`user/${currentUser.id}`}
                     >
                       My Posts
                     </Link>
                   </Typography>
                 </MenuItem>
                 <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography variant='body1' sx={{textDecoration:'none'}} textAlign="center">
+                  {/* <Typography variant='body1' sx={{textDecoration:'none'}} textAlign="center">
                     <Link 
                       to='/contact'
                     >
                       Contact
                     </Link>
-                  </Typography>
+                  </Typography> */}
                 </MenuItem>
             </Menu>
           </Box>
@@ -150,7 +148,7 @@ const Appbar = () =>
               >
                 <Link 
                   style={{ color: 'inherit', textDecoration: 'inherit'}} 
-                  to={`user/${currentUser.id}`}
+                  to={`/user/posts/${currentUser.id}`}
                 >
                   My Posts
                 </Link>
