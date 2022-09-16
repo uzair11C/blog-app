@@ -12,7 +12,9 @@ const BlogAuthor = () =>
 
     const thisPost = posts.filter(post => post.id === parseInt(params.id))
 
-    const [author, setAuthor] = useState([])
+    const [author, setAuthor] = useState({})
+
+    console.log(thisPost[0])
 
     const fetchSingle = async () =>
     {
@@ -23,8 +25,6 @@ const BlogAuthor = () =>
 
     useEffect(() => {
         fetchSingle()
-        console.log(thisPost)
-        console.log(author.address.city)
     },[])
 
     return (
@@ -116,8 +116,8 @@ const BlogAuthor = () =>
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Address: {author.address.suite}, {author.address.street}, 
-                                     {author.address.city}
+                            Address: {author.address.suite},&nbsp;{author.address.street}, 
+                                    &nbsp;{author.address.city},&nbsp;
                                      {author.address.zipcode}
                         </Typography> */}
                     </Stack>
