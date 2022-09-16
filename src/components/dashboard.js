@@ -3,6 +3,7 @@ import React from 'react'
 import Appbar from './Appbar'
 import Bloggers from './bloggers'
 import PostsComp from './postsComp'
+import { Link } from 'react-router-dom'
 
 const Dashboard = () => 
 {
@@ -39,7 +40,12 @@ const Dashboard = () =>
                                 fontSize:'18px',
                             }}
                         >
-                            Create a new post
+                            <Link 
+                                style={{textDecoration:'none',color:'inherit'}}
+                                to='/create-post'
+                            >
+                                Create a new post
+                            </Link>
                         </Button>
                         <Bloggers />
                     </Grid>
