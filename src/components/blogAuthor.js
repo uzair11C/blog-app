@@ -1,30 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Stack, Paper, Typography, Box } from '@mui/material'
 import { AllPosts } from '../contexts/allPostsContext'
+import { AllUsers } from '../contexts/allUsersContext'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 
 const BlogAuthor = () => 
 {
-    const params = useParams()
+    const [author, setAuthor] = useState([])
 
     const posts = useContext(AllPosts)
+    const [users, setUsers] = useContext(AllUsers)
+
+    const params = useParams()
 
     const thisPost = posts.filter(post => post.id === parseInt(params.id))
 
-    const [author, setAuthor] = useState({})
-
-    console.log(thisPost[0])
-
-    const fetchSingle = async () =>
-    {
-        const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${thisPost[0].userId}`)
-        const data = await res.data
-        setAuthor(data)
-    }
+    const thisUser = users.filter(user => user.id === parseInt(thisPost[0].userId))
 
     useEffect(() => {
-        fetchSingle()
+        setAuthor(thisUser&&thisUser[0])
+        console.log(author)
     },[])
 
     return (
