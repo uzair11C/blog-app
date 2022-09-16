@@ -8,15 +8,13 @@ import { AllPostsContext } from './contexts/allPostsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <AllUsersContext>
-        <CurrentUserContext>
-          <AllPostsContext>
-            <App />
-          </AllPostsContext>
-        </CurrentUserContext>
-      </AllUsersContext>
-    </Router>
-  </React.StrictMode>
+  <Router>
+    <AllUsersContext>
+      <CurrentUserContext>
+        <AllPostsContext>
+          <App />
+        </AllPostsContext>
+      </CurrentUserContext>
+    </AllUsersContext>
+  </Router>
 )
