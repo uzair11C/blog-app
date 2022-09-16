@@ -11,6 +11,8 @@ const MyPosts = () =>
 
     const myPosts = posts.filter(post => post.userId === currentUser.id)
 
+    console.log(myPosts)
+
     return(
         <Card
             raised
