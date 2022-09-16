@@ -5,45 +5,29 @@ import { CurrentUser } from '../contexts/currentUserContext'
 import axios from 'axios'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useNavigate } from 'react-router-dom'
 
 function CreatePost()
 {
+    const navigate = useNavigate()
+
     const [currentUser, setCurrentUser] = useContext(CurrentUser)
 
-    const [newPost, setNewPost] = useState({
-        id:'',
-        userId: '',
-        title: '',
-        body: ''
-    })
-
-    const createPost = () =>
+    const createPost = (values) =>
     {
-        setNewPost({
-            id: Math.random(),
-            userId: currentUser.id,
-            title: formik.values.title,
-            body: formik.values.body
+        axios.post('https://jsonplaceholder.typicode.com/posts',
+           
+            values
+        )
+        .then(res =>{
+            navigate('/user/posts',{replace:'true'})
         })
 
-        console.log(newPost)
-        axios.post('https://jsonplaceholder.typicode.com/posts',{
-            id: newPost.id,
-            userId: newPost.id,
-            title: newPost.title,
-            body: newPost.body
-        })
-        .then(alert(`Successfully Created Post ${newPost.id}`))
-        .then(setNewPost({
-            id:'',
-            userId: '',
-            title: '',
-            body: ''
-        }))
     }
 
     const formik = useFormik(
         {
+            enableReinitialize:true,
             initialValues:{
                 title: '',
                 body: ''
@@ -54,9 +38,11 @@ function CreatePost()
                     body: Yup.string().required('Required').min(10,'At least one line'),
                 }
             ),
-            onSubmit: () =>
+            onSubmit: (values) =>
             {
-                createPost()
+                console.log('vv ',values)
+                values.userId = currentUser.id
+                createPost(values)
             }
         }
     )
@@ -94,11 +80,12 @@ function CreatePost()
                         Title: 
                     </Typography>
                     <TextField
-                        id="outlined-textarea"
+                        id="title"
                         placeholder="Post Title"
                         style={{marginBottom:'40px'}}
-                        value={formik.values.name} 
+                        value={formik.values.title} 
                         onChange={formik.handleChange}
+                        name='title'
                     />
                     <Typography
                         variant='h4'
@@ -106,19 +93,19 @@ function CreatePost()
                         Body: 
                     </Typography>
                     <TextField
-                        id="outlined-multiline-static"
+                        id="body"
                         multiline
                         placeholder='Post Body'
                         rows={7}
-                        value={formik.values.name} 
+                        value={formik.values.body} 
                         onChange={formik.handleChange}
                         style={{marginBottom:'15px'}}
+                        name='body'
                     />
                     <Button
                         type='submit'
                         variant='contained'
                         color='warning'
-                        onSubmit={formik.handleSubmit}
                     >
                         Create Post
                     </Button>
