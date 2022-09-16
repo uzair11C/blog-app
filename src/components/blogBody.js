@@ -11,7 +11,7 @@ const BlogBody = () =>
 
     const fetchSingle = async () =>
     {
-        const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/posts/${parseInt(params.id)}`)
         const data = await res.data
         setSingle(data)
     }
