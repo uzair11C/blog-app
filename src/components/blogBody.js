@@ -7,7 +7,7 @@ const BlogBody = () =>
 {
     const params = useParams()
 
-    const [single, setSingle] = useState([])
+    const [single, setSingle] = useState({})
 
     const fetchSingle = async () =>
     {
