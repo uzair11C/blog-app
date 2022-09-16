@@ -9,6 +9,7 @@ import Dashboard from "./components/dashboard";
 import Login from "./components/login"
 import MyPostsPage from './components/myPostsPage'
 import BlogPage from './components/blogPage'
+import CreatePost from "./components/createPost";
 
 function App() 
 {
@@ -32,6 +33,7 @@ function App()
         <Route exact path='/user/posts' element={<MyPostsPage />} />
         <Route exact path='/post/:id' element={<BlogPage />} />
         <Route exact path='/user/posts/:id' element={<BlogPage />} />
+        <Route exact path='/create-post' element={<CreatePost />} />
       </Routes>
     </div>
   );
