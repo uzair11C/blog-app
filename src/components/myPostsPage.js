@@ -2,6 +2,7 @@ import { Container, Grid, Button } from '@mui/material'
 import Appbar from './Appbar'
 import MyPosts from './myPosts'
 import Bloggers from './bloggers'
+import { Link } from 'react-router-dom'
 
 function MyPostsPage()
 {
@@ -38,7 +39,12 @@ function MyPostsPage()
                                 fontSize:'18px',
                             }}
                         >
-                            Create a new post
+                            <Link 
+                                style={{textDecoration:'none',color:'inherit'}}
+                                to='/create-post'
+                            >
+                                Create a new post
+                            </Link>
                         </Button>
                         <Bloggers />
                     </Grid>
