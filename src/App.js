@@ -10,6 +10,7 @@ import Login from "./components/login"
 import MyPostsPage from './components/myPostsPage'
 import BlogPage from './components/blogPage'
 import CreatePost from "./components/createPost";
+import EditPost from "./components/editPost";
 
 function App() 
 {
@@ -34,6 +35,7 @@ function App()
         <Route exact path='/post/:id' element={<BlogPage />} />
         <Route exact path='/user/posts/:id' element={<BlogPage />} />
         <Route exact path='/create-post' element={<CreatePost />} />
+        <Route exact path='/edit-post/:id' element={<EditPost />} />
       </Routes>
     </div>
   );
