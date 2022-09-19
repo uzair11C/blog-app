@@ -6,8 +6,6 @@ import { useParams } from 'react-router-dom'
 
 const BlogAuthor = () => 
 {
-    const [author, setAuthor] = useState([])
-
     const posts = useContext(AllPosts)
     const [users, setUsers] = useContext(AllUsers)
 
@@ -16,12 +14,6 @@ const BlogAuthor = () =>
     const thisPost = posts.filter(post => post.id === parseInt(params.id))
 
     const thisUser = users.filter(user => user.id === parseInt(thisPost[0].userId))
-
-    useEffect(() => {
-        setAuthor(thisUser&&thisUser[0])
-        console.log(author)
-    },[])
-
     return (
         <Paper 
             elevation={5}
@@ -42,7 +34,7 @@ const BlogAuthor = () =>
                         mb: '10px',
                     }}
                     >
-                        About the author:
+                        About the Author:
                 </Typography >
                 <Box
                     sx={{
@@ -71,50 +63,50 @@ const BlogAuthor = () =>
                                 </Typography >
                             ))
                         } */}
-                        {/* <Typography
+                        <Typography
                             variant='h6'
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Name: {author.name}
+                            Name: {thisUser[0].name}
                         </Typography>
                         <Typography
                             variant='h6'
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Phone: {author.phone}
+                            Phone: {thisUser[0].phone}
                         </Typography>
                         <Typography
                             variant='h6'
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Email: {author.email}
+                            Email: {thisUser[0].email}
                         </Typography>
                         <Typography
                             variant='h6'
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Website: {author.website}
+                            Website: {thisUser[0].website}
                         </Typography>
                         <Typography
                             variant='h6'
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Company: {author.company.name}
+                            Company: {thisUser[0].company.name}
                         </Typography>
                         <Typography
                             variant='h6'
                             component='p'
                             sx={{fontSize:'14px'}}
                         >
-                            Address: {author.address.suite},&nbsp;{author.address.street}, 
-                                    &nbsp;{author.address.city},&nbsp;
-                                     {author.address.zipcode}
-                        </Typography> */}
+                            Address: {thisUser[0].address.suite},&nbsp;{thisUser[0].address.street}, 
+                                    &nbsp;{thisUser[0].address.city},&nbsp;
+                                     {thisUser[0].address.zipcode}
+                        </Typography>
                     </Stack>
                 </Box>
             </Box>
