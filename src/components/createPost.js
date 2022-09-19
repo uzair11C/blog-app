@@ -1,5 +1,5 @@
 import { Button, Container, Stack, TextField, Typography } from '@mui/material'
-import React, {useContext,useEffect,useState} from 'react'
+import React, {useContext,} from 'react'
 import Appbar from './Appbar'
 import { CurrentUser } from '../contexts/currentUserContext'
 import axios from 'axios'
@@ -16,21 +16,19 @@ function CreatePost()
     const createPost = (values) =>
     {
         axios.post('https://jsonplaceholder.typicode.com/posts',
-           
             values
         )
         .then(res =>{
             navigate('/user/posts',{replace:'true'})
         })
-
     }
 
     const formik = useFormik(
         {
             enableReinitialize:true,
             initialValues:{
-                title: '',
-                body: ''
+                    title: '',
+                    body: ''
             },
             validationSchema: Yup.object(
                 {
@@ -40,7 +38,7 @@ function CreatePost()
             ),
             onSubmit: (values) =>
             {
-                console.log('vv ',values)
+                console.log(values)
                 values.userId = currentUser.id
                 createPost(values)
             }
@@ -67,49 +65,49 @@ function CreatePost()
                         alignItems:'stretch'
                     }}    
                 >
-                <Stack 
-                    direction='column'
-                    justifyContent='flex-start'
-                    alignItems='stretch'
-                    spacing={1}
-                    sx={{width:'inherit'}}
-                >
-                    <Typography
-                        variant='h4'
+                    <Stack 
+                        direction='column'
+                        justifyContent='flex-start'
+                        alignItems='stretch'
+                        spacing={1}
+                        sx={{width:'inherit'}}
                     >
-                        Title: 
-                    </Typography>
-                    <TextField
-                        id="title"
-                        placeholder="Post Title"
-                        style={{marginBottom:'40px'}}
-                        value={formik.values.title} 
-                        onChange={formik.handleChange}
-                        name='title'
-                    />
-                    <Typography
-                        variant='h4'
-                    >
-                        Body: 
-                    </Typography>
-                    <TextField
-                        id="body"
-                        multiline
-                        placeholder='Post Body'
-                        rows={7}
-                        value={formik.values.body} 
-                        onChange={formik.handleChange}
-                        style={{marginBottom:'15px'}}
-                        name='body'
-                    />
-                    <Button
-                        type='submit'
-                        variant='contained'
-                        color='warning'
-                    >
-                        Create Post
-                    </Button>
-                </Stack>
+                        <Typography
+                            variant='h4'
+                        >
+                            Title: 
+                        </Typography>
+                        <TextField
+                            id="title"
+                            placeholder="Post Title"
+                            style={{marginBottom:'40px'}}
+                            value={formik.values.title} 
+                            onChange={formik.handleChange}
+                            name='title'
+                        />
+                        <Typography
+                            variant='h4'
+                        >
+                            Body: 
+                        </Typography>
+                        <TextField
+                            id="body"
+                            multiline
+                            placeholder='Post Body'
+                            rows={7}
+                            value={formik.values.body} 
+                            onChange={formik.handleChange}
+                            style={{marginBottom:'15px'}}
+                            name='body'
+                        />
+                        <Button
+                            type='submit'
+                            variant='contained'
+                            color='warning'
+                        >
+                            Create Post
+                        </Button>
+                    </Stack>
                 </form>
             </Container>
         </>
