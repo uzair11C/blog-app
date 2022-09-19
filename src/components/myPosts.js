@@ -3,13 +3,13 @@ import { Stack, Divider, Typography, Card, Box, IconButton } from '@mui/material
 import { AllPosts } from '../contexts/allPostsContext'
 import { CurrentUser } from '../contexts/currentUserContext'
 import { Link } from 'react-router-dom'
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Delete, CreateTwoTone } from '@mui/icons-material';
 import axios from 'axios'
 
-const MyPosts = () => 
+
+function MyPosts()
 {
     const posts = useContext(AllPosts)
-
     const [currentUser, setCurrentUser] = useContext(CurrentUser)
 
     const myPosts = posts.filter(post => post.userId === currentUser.id)
@@ -80,13 +80,32 @@ const MyPosts = () =>
                                     >
                                         &#10148;  {post.title} &#10140;
                                     </Link>
+                                    <IconButton
+                                        aria-label='edit'
+                                        size='large'
+                                        color='warning'
+                                        //onClick={handleClickOpen}
+                                    >
+                                        <Link
+                                            style={{color:'inherit',textDecoration:'none'}}
+                                            to={`/edit-post/${post.id}`}
+                                        >
+                                            <CreateTwoTone fontSize='medium' />
+                                        </Link>
+                                    </IconButton>
+                                    {/* <EditDialog 
+                                        id={post.id}
+                                        editPost={editPost} 
+                                        open={open}
+                                        handleClose={handleClose}
+                                        myPosts={myPosts} /> */}
                                     <IconButton 
                                         aria-label="delete" 
                                         size="large"
                                         color='error'
                                         onClick={() => { deletePost(post.id) }}
                                     >
-                                        <DeleteIcon fontSize="medium" />
+                                        <Delete fontSize="medium" />
                                     </IconButton>
                                 </Stack>
                             </Typography>
