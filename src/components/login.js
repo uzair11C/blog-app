@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import { Container, Paper, Typography, Button, Stack } from '@mui/material'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
@@ -8,7 +8,7 @@ import { AllUsers } from '../contexts/allUsersContext'
 
 const Login = () => 
 {
-    let error = ''
+    const [error, setError] = useState('')
     const [users, setUsers] = useContext(AllUsers)
     const [currentUser, setCurrentUser] = useContext(CurrentUser)
 
@@ -47,7 +47,7 @@ const Login = () =>
             }
             else
             {
-                error = 'Details do not match'
+                setError('Details do not match')
             }
         })
     }
@@ -58,7 +58,7 @@ const Login = () =>
             <Typography variant='h2' component='div' sx={{textAlign:'left',mb:'10px'}}>
                 Login
             </Typography>
-            <Typography variant='p' component='p' sx={{color:'red'}}>
+            <Typography variant='p' component='p' sx={{textAlign:'left',color:'red'}}>
                 {error}
             </Typography>
             <form onSubmit={formik.handleSubmit}>
@@ -70,7 +70,7 @@ const Login = () =>
                             </Typography>
                         </label>
                         <input onBlur={formik.handleBlur} type='text' id='name' name='name' placeholder='Name' value={formik.values.name} onChange={formik.handleChange}/>
-                        {formik.touched.name && formik.errors.name?<Typography variant='subtitle' component='p'>{formik.errors.name}</Typography>:null}
+                        {formik.touched.name && formik.errors.name?<Typography variant='subtitle' component='p' sx={{color:'red'}}>{formik.errors.name}</Typography>:null}
                     </div>
                     
                     <div>
@@ -80,7 +80,7 @@ const Login = () =>
                             </Typography>
                         </label>
                         <input onBlur={formik.handleBlur} type='email' id='email' name='email' placeholder='Email' value={formik.values.email} onChange={formik.handleChange}/>
-                        {formik.touched.email && formik.errors.email?<Typography variant='subtitle' component='p'>{formik.errors.email}</Typography>:null}
+                        {formik.touched.email && formik.errors.email?<Typography variant='subtitle' component='p' sx={{color:'red'}}>{formik.errors.email}</Typography>:null}
                     </div>
 
                     <Button type='submit' variant='contained' sx={{mt:'10px'}} onSubmit={formik.handleSubmit}>
