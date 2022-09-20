@@ -45,8 +45,14 @@ function EditPost()
             },
             validationSchema: Yup.object(
                 {
-                    title: Yup.string().required('Required').min(5,'Minimum 5 characters'),
-                    body: Yup.string().required('Required').min(10,'At least one line'),
+                    title: Yup.string()
+                           .required('Required')
+                           .min(5,'At least 1 word!')
+                           .matches('^[a-z A-Z _]+([a-z A-Z _]+)*$','No numbers allowed!'),
+                    body: Yup.string()
+                          .required('Required')
+                          .min(15,'At least one line!')
+                          .matches('^[a-z A-Z 0-9 _]+( [a-z A-Z 0-9 _]+)*$','Only numbers and letters!'),
                 }
             ),
             onSubmit: (values) =>
