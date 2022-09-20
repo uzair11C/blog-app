@@ -11,6 +11,8 @@ import {
  import * as Yup from 'yup'
  import { useParams, useNavigate } from 'react-router-dom'
  import axios from 'axios'
+ import { toast } from 'react-toastify'
+ import "react-toastify/dist/ReactToastify.css";
 
 function EditPost() 
 {
@@ -55,14 +57,35 @@ function EditPost()
         }
     )
 
-    const editPost = (values) =>
+    const editPost = async (values) =>
     {
-        axios.patch(`https://jsonplaceholder.typicode.com/users/${currentPost.id}`,
-        values)
-        .then(
-            alert(`Successfully Updated Post ${currentPost.id}`),
-            navigate('/user/posts',{replace:'true'})
-        )
+        try 
+        {
+            const res = await axios.patch(`https://jsonplaceholder.typicode.com/users/${currentPost.id}`,
+                values
+            )
+            toast.success(
+                `Post Edited with success code ${res.status}`
+            )
+            setTimeout(()=>{
+                navigate('/user/posts',{replace: true})
+            },1000)
+        } 
+        catch (error) 
+        {
+            toast.error(
+                    error.message,
+                    {
+                        position: "top-right",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined
+                    }
+                )
+        }
     }
 
     return(
