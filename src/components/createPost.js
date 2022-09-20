@@ -1,4 +1,5 @@
 import { Button, Container, Stack, TextField, Typography } from '@mui/material'
+import { styled } from '@mui/material/styles';
 import React, {useContext,} from 'react'
 import Appbar from './Appbar'
 import { CurrentUser } from '../contexts/currentUserContext'
@@ -55,8 +56,14 @@ function CreatePost()
             },
             validationSchema: Yup.object(
                 {
-                    title: Yup.string().required('Required').min(5,'At least 1 word!'),
-                    body: Yup.string().required('Required').min(15,'At least one line!'),
+                    title: Yup.string()
+                              .required('Required')
+                              .min(5,'At least 1 word!')
+                              .matches('^[a-z A-Z _]+([a-z A-Z _]+)*$','No numbers allowed!'),
+                    body: Yup.string()
+                             .required('Required')
+                             .min(15,'At least one line!')
+                             .matches('^[a-z A-Z 0-9 _]+( [a-z A-Z 0-9 _]+)*$','Only numbers and letters!'),
                 }
             ),
             onSubmit: (values) =>
@@ -107,6 +114,11 @@ function CreatePost()
                             onChange={formik.handleChange}
                             name='title'
                             onBlur={formik.handleBlur}
+                            sx={{
+                                '&.Mui-focused fieldset': {
+                                    borderColor: 'green',
+                                  },
+                            }}
                         />
                         {
                             formik.touched.title && formik.errors.title
