@@ -55,8 +55,8 @@ function CreatePost()
             },
             validationSchema: Yup.object(
                 {
-                    title: Yup.string().required('Required').min(5,'Minimum 5 characters'),
-                    body: Yup.string().required('Required').min(10,'At least one line'),
+                    title: Yup.string().required('Required').min(5,'At least 1 word!'),
+                    body: Yup.string().required('Required').min(15,'At least one line!'),
                 }
             ),
             onSubmit: (values) =>
@@ -92,24 +92,38 @@ function CreatePost()
                         direction='column'
                         justifyContent='flex-start'
                         alignItems='stretch'
-                        spacing={1}
                         sx={{width:'inherit'}}
+                        spacing={1}
                     >
                         <Typography
-                            variant='h4'
+                            variant='h5'
                         >
                             Title: 
                         </Typography>
                         <TextField
                             id="title"
                             placeholder="Post Title"
-                            style={{marginBottom:'40px'}}
                             value={formik.values.title} 
                             onChange={formik.handleChange}
                             name='title'
+                            onBlur={formik.handleBlur}
                         />
+                        {
+                            formik.touched.title && formik.errors.title
+                                ?
+                                <Typography 
+                                    variant='subtitle' 
+                                    component='p' 
+                                    sx={{color:'red'}}
+                                >
+                                    {formik.errors.title}
+                                </Typography>
+                                :
+                                null
+                        }
                         <Typography
-                            variant='h4'
+                            variant='h5'
+                            sx={{mt:'40px'}}
                         >
                             Body: 
                         </Typography>
@@ -120,13 +134,27 @@ function CreatePost()
                             rows={7}
                             value={formik.values.body} 
                             onChange={formik.handleChange}
-                            style={{marginBottom:'15px'}}
                             name='body'
+                            onBlur={formik.handleBlur}
                         />
+                        {
+                            formik.touched.body && formik.errors.body
+                                ?
+                                <Typography 
+                                    variant='subtitle' 
+                                    component='p' 
+                                    sx={{color:'red'}}
+                                >
+                                    {formik.errors.body}
+                                </Typography>
+                                :
+                                null
+                        }
                         <Button
                             type='submit'
                             variant='contained'
                             color='warning'
+                            sx={{mt:'15px'}}
                         >
                             Create Post
                         </Button>
