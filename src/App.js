@@ -39,7 +39,17 @@ function App()
         <Route exact path='/create-post' element={<CreatePost />} />
         <Route exact path='/edit-post/:id' element={<EditPost />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer 
+        position="top-right"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
