@@ -15,27 +15,35 @@ function CreatePost()
 
     const [currentUser, setCurrentUser] = useContext(CurrentUser)
 
-    const createPost = (values) =>
+    const createPost = async (values) =>
     {
-        axios.post('https://jsonplaceholder.typicode.com/posts',
-            values
-        ).then(
-            toast.success(
-                'Successfully created new post',
-                {
-                    position: "top-right",
-                    autoClose: 2500,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined
-                }
+        try 
+        {
+            const res = await axios.post('https://jsonplaceholder.typicode.com/posts',
+                values
             )
-        )
-        .then(res =>{
-            navigate('/user/posts',{replace:'true'})
-        })
+            toast.success(
+                `Post Created with success code ${res.status}`
+            )
+            setTimeout(()=>{
+                navigate('/user/posts',{replace: true})
+            },1000)
+        } 
+        catch (error) 
+        {
+            toast.error(
+                    error.message,
+                    {
+                        position: "top-right",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined
+                    }
+                )
+        }
     }
 
     const formik = useFormik(
