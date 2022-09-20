@@ -11,6 +11,8 @@ import MyPostsPage from './components/myPostsPage'
 import BlogPage from './components/blogPage'
 import CreatePost from "./components/createPost";
 import EditPost from "./components/editPost";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify'
 
 function App() 
 {
@@ -37,6 +39,7 @@ function App()
         <Route exact path='/create-post' element={<CreatePost />} />
         <Route exact path='/edit-post/:id' element={<EditPost />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
