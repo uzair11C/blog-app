@@ -6,6 +6,8 @@ import axios from 'axios'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import "react-toastify/dist/ReactToastify.css";
 
 function CreatePost()
 {
@@ -17,6 +19,19 @@ function CreatePost()
     {
         axios.post('https://jsonplaceholder.typicode.com/posts',
             values
+        ).then(
+            toast.success(
+                'Successfully created new post',
+                {
+                    position: "top-right",
+                    autoClose: 2500,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined
+                }
+            )
         )
         .then(res =>{
             navigate('/user/posts',{replace:'true'})
