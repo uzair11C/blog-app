@@ -7,6 +7,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CapitalizeFirstLetter from "./capitalize";
 
 function EditPost() {
 	const [currentPost, setCurrentPost] = useState({});
@@ -31,21 +32,19 @@ function EditPost() {
 	const formik = useFormik({
 		enableReinitialize: true,
 		initialValues: {
-			title: currentPost.title,
-			body: currentPost.body,
+			title: CapitalizeFirstLetter(currentPost.title),
+			body: CapitalizeFirstLetter(currentPost.body),
 		},
 		validationSchema: Yup.object({
 			title: Yup.string()
 				.required("Required")
 				.min(5, "At least 1 word!")
 				.matches("^[a-z A-Z _]+([a-z A-Z _]+)*$", "No numbers allowed!"),
-			body: Yup.string()
-				.required("Required")
-				.min(15, "At least one line!")
-				.matches(
-					"^[a-z A-Z 0-9 _]+( [a-z A-Z 0-9 _]+)*$",
-					"Only numbers and letters!"
-				),
+			body: Yup.string().required("Required").min(15, "At least one line!"),
+			// .matches(
+			// 	"^[a-z A-Z 0-9 _]+( [a-z A-Z 0-9 _]+)*$",
+			// 	"Only numbers and letters!"
+			// ),
 		}),
 		onSubmit: (values) => {
 			editPost(values);
@@ -104,7 +103,14 @@ function EditPost() {
 						spacing={1}
 						sx={{ width: "inherit" }}
 					>
-						<Typography variant="h4">Title:</Typography>
+						<Typography
+							variant="h5"
+							sx={{
+								color: "#fff",
+							}}
+						>
+							Title:
+						</Typography>
 						<TextField
 							id="title"
 							placeholder="Post Title"
@@ -112,6 +118,7 @@ function EditPost() {
 							value={formik.values.title}
 							onChange={formik.handleChange}
 							name="title"
+							onBlur={formik.handleBlur}
 							sx={{
 								"& .MuiOutlinedInput-root fieldset": {
 									border: "2px solid #C4C4C4",
@@ -120,9 +127,32 @@ function EditPost() {
 											? "#ff0000"
 											: "#C4C4C4",
 								},
+								"& ::-webkit-input-placeholder": {
+									color: "#fff",
+								},
+								input: {
+									color: "#fff",
+								},
 							}}
 						/>
-						<Typography variant="h4">Body:</Typography>
+						{formik.touched.title && formik.errors.title ? (
+							<Typography
+								variant="subtitle"
+								component="p"
+								sx={{ color: "red" }}
+							>
+								{formik.errors.title}
+							</Typography>
+						) : null}
+						<Typography
+							variant="h5"
+							sx={{
+								mt: "30px",
+								color: "#fff",
+							}}
+						>
+							Body:
+						</Typography>
 						<TextField
 							id="body"
 							multiline
@@ -132,6 +162,7 @@ function EditPost() {
 							onChange={formik.handleChange}
 							style={{ marginBottom: "15px" }}
 							name="body"
+							onBlur={formik.handleBlur}
 							sx={{
 								"& .MuiOutlinedInput-root fieldset": {
 									border: "2px solid #C4C4C4",
@@ -140,9 +171,32 @@ function EditPost() {
 											? "#ff0000"
 											: "#C4C4C4",
 								},
+								"& ::-webkit-input-placeholder": {
+									color: "#fff",
+								},
+								input: {
+									color: "#fff",
+								},
 							}}
 						/>
-						<Button type="submit" variant="contained" color="warning">
+						{formik.touched.body && formik.errors.body ? (
+							<Typography
+								variant="subtitle"
+								component="p"
+								sx={{ color: "red" }}
+							>
+								{formik.errors.body}
+							</Typography>
+						) : null}
+						<Button
+							type="submit"
+							variant="contained"
+							color="warning"
+							sx={{
+								textTransform: "none",
+								fontSize: "18px",
+							}}
+						>
 							Update Post
 						</Button>
 					</Stack>
