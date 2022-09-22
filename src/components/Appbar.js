@@ -218,7 +218,14 @@ const Appbar = () => {
 					</Box>
 					<Button
 						variant="contained"
-						color="error"
+						sx={{
+							textTransform: "none",
+							backgroundColor: "#FF0000",
+							pr: "25px",
+							pl: "25px",
+							borderRadius: "7px",
+							fontWeight: 600,
+						}}
 						onClick={() => {
 							setCurrentUser({
 								id: null,
