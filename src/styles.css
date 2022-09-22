@@ -1,5 +1,9 @@
-.link a
+body, .app
 {
-    text-decoration: none;
-    color: fuchsia;
+    background-color: #39065A;
+}
+
+.card
+{
+    background-color: #6A0572;
 }
