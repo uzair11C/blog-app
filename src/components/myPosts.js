@@ -12,6 +12,9 @@ import { CurrentUser } from "../contexts/currentUserContext";
 import { Link } from "react-router-dom";
 import { Delete, CreateTwoTone } from "@mui/icons-material";
 import axios from "axios";
+import CapitalizeFirstLetter from "./capitalize";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyPosts() {
 	const posts = useContext(AllPosts);
@@ -19,10 +22,23 @@ function MyPosts() {
 
 	const myPosts = posts.filter((post) => post.userId === currentUser.id);
 
-	const deletePost = (id) => {
-		axios
-			.delete(`https://jsonplaceholder.typicode.com/posts/${id}`)
-			.then(alert(`Post ${id} deleted successfully!`));
+	const deletePost = async (id) => {
+		try {
+			const res = await axios.delete(
+				`https://jsonplaceholder.typicode.com/posts/${id}`
+			);
+			toast.success(`Post ${id} deleted with success code ${res.status}`);
+		} catch (error) {
+			toast.error(error.message, {
+				position: "top-right",
+				autoClose: 2500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+		}
 	};
 
 	return (
@@ -61,55 +77,54 @@ function MyPosts() {
 			>
 				<Stack
 					direction="column-reverse"
-					justifyContent="center"
+					justifyContent="space-between"
 					alignItems="flex-start"
 					divider={<Divider flexItem />}
 					spacing={2}
-					sx={{ mt: "20px" }}
+					sx={{ mt: "20px", width: "100%" }}
 				>
 					{myPosts &&
 						myPosts.map((post) => (
-							<Typography
+							<Stack
+								direction="row"
+								spacing={3}
+								justifyContent="space-between"
+								alignItems="center"
 								key={post.id}
-								variant="h6"
-								component="div"
-								sx={{
-									letterSpacing: "0.1rem",
-								}}
+								sx={{ width: "inherit" }}
 							>
+								<Typography
+									key={post.id}
+									variant="h6"
+									component="div"
+									sx={{
+										letterSpacing: "0.1rem",
+										textDecoration: "none",
+										color: "#fff",
+										opacity: "0.7",
+										"&:hover": {
+											color: "#160040",
+											transition: "0.3s ease-in-out",
+										},
+									}}
+								>
+									<Link
+										style={{ color: "inherit", textDecoration: "none" }}
+										to={`/user/posts/${post.id}`}
+									>
+										{CapitalizeFirstLetter(post.title)}
+									</Link>
+								</Typography>
 								<Stack
 									direction="row"
-									spacing={3}
-									justifyContent="space-between"
+									justifyContent="center"
 									alignItems="center"
+									spacing={2}
 								>
-									<Typography
-										key={post.id}
-										variant="h6"
-										component="div"
-										sx={{
-											letterSpacing: "0.1rem",
-											textDecoration: "none",
-											color: "#fff",
-											opacity: "0.7",
-											"&:hover": {
-												color: "#160040",
-												transition: "0.3s ease-in-out",
-											},
-										}}
-									>
-										<Link
-											style={{ color: "inherit", textDecoration: "none" }}
-											to={`/user/posts/${post.id}`}
-										>
-											{post.title}
-										</Link>
-									</Typography>
 									<IconButton
 										aria-label="edit"
 										size="large"
-										color="warning"
-										//onClick={handleClickOpen}
+										sx={{ color: "#FFF80A" }}
 									>
 										<Link
 											style={{ color: "inherit", textDecoration: "none" }}
@@ -118,16 +133,10 @@ function MyPosts() {
 											<CreateTwoTone fontSize="medium" />
 										</Link>
 									</IconButton>
-									{/* <EditDialog 
-                                        id={post.id}
-                                        editPost={editPost} 
-                                        open={open}
-                                        handleClose={handleClose}
-                                        myPosts={myPosts} /> */}
 									<IconButton
 										aria-label="delete"
 										size="large"
-										color="error"
+										sx={{ color: "#FF0000" }}
 										onClick={() => {
 											deletePost(post.id);
 										}}
@@ -135,7 +144,7 @@ function MyPosts() {
 										<Delete fontSize="medium" />
 									</IconButton>
 								</Stack>
-							</Typography>
+							</Stack>
 						))}
 				</Stack>
 			</Box>
