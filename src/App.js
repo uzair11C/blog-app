@@ -1,23 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext, useEffect } from "react";
+import { CurrentUser } from './contexts/currentUserContext'
+import {
+  Routes,
+  Route,
+  useNavigate 
+} from "react-router-dom";
+import Dashboard from "./components/dashboard";
+import Login from "./components/login"
+import MyPostsPage from './components/myPostsPage'
+import BlogPage from './components/blogPage'
+import CreatePost from "./components/createPost";
+import EditPost from "./components/editPost";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from 'react-toastify'
 
-function App() {
+function App() 
+{
+  const navigate = useNavigate()
+  const [currentUser, setCurrentUser] = useContext(CurrentUser)
+
+  useEffect(
+    () => {
+      currentUser.id === null
+      ?
+      navigate('/login',{replace:'true'})
+      :
+      navigate('/dashboard',{replace:'true'})
+    },[currentUser.id])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route exact path='/login' element={<Login />} /> 
+        <Route exact path='/dashboard' element={<Dashboard />} />
+        <Route exact path='/user/posts' element={<MyPostsPage />} />
+        <Route exact path='/post/:id' element={<BlogPage />} />
+        <Route exact path='/user/posts/:id' element={<BlogPage />} />
+        <Route exact path='/create-post' element={<CreatePost />} />
+        <Route exact path='/edit-post/:id' element={<EditPost />} />
+      </Routes>
+      <ToastContainer 
+        position="top-right"
+        autoClose={3500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </div>
   );
 }
