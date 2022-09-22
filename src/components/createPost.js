@@ -91,7 +91,14 @@ function CreatePost() {
 						sx={{ width: "inherit" }}
 						spacing={1}
 					>
-						<Typography variant="h5">Title:</Typography>
+						<Typography
+							variant="h5"
+							sx={{
+								color: "#fff",
+							}}
+						>
+							Title:
+						</Typography>
 						<TextField
 							id="title"
 							placeholder="Post Title"
@@ -102,10 +109,17 @@ function CreatePost() {
 							sx={{
 								"& .MuiOutlinedInput-root fieldset": {
 									border: "2px solid #C4C4C4",
+									color: "#fff",
 									borderColor:
 										formik.touched.title && formik.errors.title
 											? "#ff0000"
 											: "#C4C4C4",
+								},
+								"& ::-webkit-input-placeholder": {
+									color: "#fff",
+								},
+								input: {
+									color: "#fff",
 								},
 							}}
 						/>
@@ -118,7 +132,13 @@ function CreatePost() {
 								{formik.errors.title}
 							</Typography>
 						) : null}
-						<Typography variant="h5" sx={{ mt: "40px" }}>
+						<Typography
+							variant="h5"
+							sx={{
+								mt: "40px",
+								color: "#fff",
+							}}
+						>
 							Body:
 						</Typography>
 						<TextField
@@ -133,10 +153,17 @@ function CreatePost() {
 							sx={{
 								"& .MuiOutlinedInput-root fieldset": {
 									border: "2px solid #C4C4C4",
+									color: "#fff",
 									borderColor:
-										formik.touched.body && formik.errors.body
+										formik.touched.title && formik.errors.title
 											? "#ff0000"
 											: "#C4C4C4",
+								},
+								"& ::-webkit-input-placeholder": {
+									color: "#fff",
+								},
+								input: {
+									color: "#fff",
 								},
 							}}
 						/>
@@ -153,7 +180,11 @@ function CreatePost() {
 							type="submit"
 							variant="contained"
 							color="warning"
-							sx={{ mt: "15px" }}
+							sx={{
+								textTransform: "none",
+								mt: "15px",
+								fontSize: "18px",
+							}}
 						>
 							Create Post
 						</Button>
