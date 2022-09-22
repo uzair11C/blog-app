@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Stack, Divider, Typography, Card, Box } from "@mui/material";
 import { AllPosts } from "../contexts/allPostsContext";
 import { Link } from "react-router-dom";
+import CapitalizeFirstLetter from "./capitalize";
 
 const PostsComp = () => {
 	const posts = useContext(AllPosts);
@@ -69,7 +70,7 @@ const PostsComp = () => {
 									style={{ color: "inherit", textDecoration: "none" }}
 									to={`/post/${post.id}`}
 								>
-									{post.title}
+									{CapitalizeFirstLetter(post.title)}
 								</Link>
 							</Typography>
 						))}
