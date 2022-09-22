@@ -156,6 +156,7 @@ function EditPost() {
 						<TextField
 							id="body"
 							multiline
+							inputProps={{ style: { color: "#fff" } }}
 							placeholder="Post Body"
 							rows={7}
 							value={formik.values.body}
@@ -174,9 +175,9 @@ function EditPost() {
 								"& ::-webkit-input-placeholder": {
 									color: "#fff",
 								},
-								input: {
-									color: "#fff",
-								},
+								// input: {
+								// 	color: "#fff",
+								// },
 							}}
 						/>
 						{formik.touched.body && formik.errors.body ? (
