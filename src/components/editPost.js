@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Button, Typography, Stack, TextField, Container } from "@mui/material";
+import {
+	Button,
+	Typography,
+	Stack,
+	TextField,
+	Container,
+	Backdrop,
+	CircularProgress,
+} from "@mui/material";
 import Appbar from "./Appbar";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -16,13 +24,16 @@ function EditPost() {
 
 	const params = useParams();
 
+	const [open, setOpen] = useState(false);
+
 	const getPost = async () => {
+		setOpen(true);
 		const res = await axios.get(
 			`https://jsonplaceholder.typicode.com/posts/${parseInt(params.id)}`
 		);
 		const post = res.data;
 		setCurrentPost(post);
-		console.log(currentPost);
+		setOpen(false);
 	};
 
 	useEffect(() => {
@@ -41,10 +52,6 @@ function EditPost() {
 				.min(5, "At least 1 word!")
 				.matches("^[a-z A-Z _]+([a-z A-Z _]+)*$", "No numbers allowed!"),
 			body: Yup.string().required("Required").min(15, "At least one line!"),
-			// .matches(
-			// 	"^[a-z A-Z 0-9 _]+( [a-z A-Z 0-9 _]+)*$",
-			// 	"Only numbers and letters!"
-			// ),
 		}),
 		onSubmit: (values) => {
 			editPost(values);
@@ -54,11 +61,14 @@ function EditPost() {
 
 	const editPost = async (values) => {
 		try {
+			setOpen(true);
 			const res = await axios.patch(
 				`https://jsonplaceholder.typicode.com/users/${currentPost.id}`,
 				values
 			);
+
 			toast.success(`Post Edited with success code ${res.status}`);
+			setOpen(false);
 			setTimeout(() => {
 				navigate("/user/posts", { replace: true });
 			}, 1000);
@@ -175,9 +185,6 @@ function EditPost() {
 								"& ::-webkit-input-placeholder": {
 									color: "#fff",
 								},
-								// input: {
-								// 	color: "#fff",
-								// },
 							}}
 						/>
 						{formik.touched.body && formik.errors.body ? (
@@ -203,6 +210,20 @@ function EditPost() {
 					</Stack>
 				</form>
 			</Container>
+			<Backdrop
+				sx={{
+					color: "#fff",
+					margin: 0,
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}
+				open={open}
+			>
+				<CircularProgress
+					sx={{
+						color: "#1597BB",
+					}}
+				/>
+			</Backdrop>
 		</>
 	);
 }
