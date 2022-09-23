@@ -3,3 +3,10 @@ body, .app
     background-color: #1A1A2E;
 }
 
+#name,#email
+{
+    background-color: #1A1A2E;
+    color: #fff;
+    font-size: 16px;
+    border: 1px solid #E2E2E21D;
+}
