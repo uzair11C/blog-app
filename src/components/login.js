@@ -67,13 +67,18 @@ const Login = () => {
 					justifyContent: "center",
 					alignItems: "center",
 					padding: "20px",
-					backgroundColor: "#878dfa",
+					background:
+						" url(frosted-glass-texture-as-background-frosted-glass-texture-as-background-interior-design-decoration-111091129.jpg), linear-gradient(253.09deg, rgba(217, 217, 217, 0.15) -7.53%, rgba(217, 217, 217, 0) 97.04%)",
+					backdropFilter: "blur(50px)",
+					overflow: "hidden",
+					border: "2px solid #E2E2E21D",
+					color: "#fff",
 				}}
 			>
 				<Typography
-					variant="h2"
+					variant="h3"
 					component="div"
-					sx={{ textAlign: "left", mb: "10px" }}
+					sx={{ textAlign: "left", mb: "30px" }}
 				>
 					Login
 				</Typography>
@@ -88,7 +93,7 @@ const Login = () => {
 					<Stack spacing={3}>
 						<div>
 							<label htmlFor="name">
-								<Typography variant="h4">Name:</Typography>
+								<Typography variant="h5">Name:</Typography>
 							</label>
 							<input
 								style={inputStyles}
@@ -113,7 +118,7 @@ const Login = () => {
 
 						<div>
 							<label htmlFor="email">
-								<Typography variant="h4">Email</Typography>
+								<Typography variant="h5">Email</Typography>
 							</label>
 							<input
 								style={inputStyles}
@@ -139,7 +144,11 @@ const Login = () => {
 						<Button
 							type="submit"
 							variant="contained"
-							sx={{ mt: "10px" }}
+							sx={{
+								mt: "10px",
+								background:
+									"linear-gradient(108.51deg, #F219A1 53.69%, #AD0CF8 100.22%, #FE007E 100.23%)",
+							}}
 							onSubmit={formik.handleSubmit}
 						>
 							Submit
