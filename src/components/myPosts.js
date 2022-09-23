@@ -29,11 +29,9 @@ function MyPosts() {
 	const deletePost = async (id) => {
 		try {
 			setOpen(true);
-			const res = await axios.delete(
-				`https://jsonplaceholder.typicode.com/posts/${id}`
-			);
+			await axios.delete(`https://jsonplaceholder.typicode.com/posts/${id}`);
 			setOpen(false);
-			toast.success(`Post ${id} deleted with success code ${res.status}`);
+			toast.success(`Post Deleted Successfully!`);
 		} catch (error) {
 			setOpen(false);
 			toast.error(error.message, {
@@ -168,13 +166,13 @@ function MyPosts() {
 					margin: 0,
 					zIndex: (theme) => theme.zIndex.drawer + 1,
 				}}
-				disableShrink
 				open={open}
 			>
 				<CircularProgress
 					sx={{
 						color: "#1597BB",
 					}}
+					disableShrink
 				/>
 			</Backdrop>
 		</>
