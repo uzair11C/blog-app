@@ -1,4 +1,10 @@
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import {
+	Button,
+	Container,
+	Stack,
+	OutlinedInput,
+	Typography,
+} from "@mui/material";
 import React, { useContext } from "react";
 import Appbar from "./Appbar";
 import { CurrentUser } from "../contexts/currentUserContext";
@@ -16,11 +22,8 @@ function CreatePost() {
 
 	const createPost = async (values) => {
 		try {
-			const res = await axios.post(
-				"https://jsonplaceholder.typicode.com/posts",
-				values
-			);
-			toast.success(`Post Created with success code ${res.status}`);
+			await axios.post("https://jsonplaceholder.typicode.com/posts", values);
+			toast.success(`New Post Created Successfully!`);
 			setTimeout(() => {
 				navigate("/user/posts", { replace: true });
 			}, 1000);
@@ -48,13 +51,7 @@ function CreatePost() {
 				.required("Required")
 				.min(5, "At least 1 word!")
 				.matches("^[a-z A-Z _]+([a-z A-Z _]+)*$", "No numbers allowed!"),
-			body: Yup.string()
-				.required("Required")
-				.min(15, "At least one line!")
-				.matches(
-					"^[a-z A-Z 0-9 _]+( [a-z A-Z 0-9 _]+)*$",
-					"Only numbers and letters!"
-				),
+			body: Yup.string().required("Required").min(15, "At least one line!"),
 		}),
 		onSubmit: (values) => {
 			console.log(values);
@@ -99,22 +96,30 @@ function CreatePost() {
 						>
 							Title:
 						</Typography>
-						<TextField
+						<OutlinedInput
 							id="title"
 							placeholder="Post Title"
 							value={formik.values.title}
 							onChange={formik.handleChange}
 							name="title"
 							onBlur={formik.handleBlur}
-							sx={{
-								"& .MuiOutlinedInput-root fieldset": {
+							variant="outlined"
+							inputProps={{
+								style: {
 									border: "2px solid #C4C4C4",
 									color: "#fff",
 									borderColor:
 										formik.touched.title && formik.errors.title
 											? "#ff0000"
 											: "#C4C4C4",
+									borderRadius: "5px",
 								},
+								"&:hover": {
+									outline: "none",
+									borderColor: "transparent",
+								},
+							}}
+							sx={{
 								"& ::-webkit-input-placeholder": {
 									color: "#fff",
 								},
@@ -141,7 +146,7 @@ function CreatePost() {
 						>
 							Body:
 						</Typography>
-						<TextField
+						<OutlinedInput
 							id="body"
 							multiline
 							placeholder="Post Body"
@@ -149,21 +154,35 @@ function CreatePost() {
 							value={formik.values.body}
 							onChange={formik.handleChange}
 							name="body"
+							dense={false}
 							onBlur={formik.handleBlur}
+							inputProps={{
+								style: {},
+							}}
 							sx={{
-								"& .MuiOutlinedInput-root fieldset": {
-									border: "2px solid #C4C4C4",
-									color: "#fff",
-									borderColor:
-										formik.touched.title && formik.errors.title
-											? "#ff0000"
-											: "#C4C4C4",
-								},
+								border: "2px solid #C4C4C4",
+								color: "#fff",
+								borderColor:
+									formik.touched.body && formik.errors.body
+										? "#ff0000"
+										: "#C4C4C4",
+								borderRadius: "5px",
+								// "& .MuiOutlinedInput-root": {
+								// 	border: "2px solid #C4C4C4",
+								// 	color: "#fff",
+								// 	borderColor:
+								// 		formik.touched.title && formik.errors.title
+								// 			? "#ff0000"
+								// 			: "#C4C4C4",
+								// 	borderRadius: "5px",
+								// 	// },
+								// },
 								"& ::-webkit-input-placeholder": {
 									color: "#fff",
 								},
-								input: {
-									color: "#fff",
+								"& .MuiOutlinedInput-root:hover": {
+									outline: "none",
+									borderColor: "transparent",
 								},
 							}}
 						/>
