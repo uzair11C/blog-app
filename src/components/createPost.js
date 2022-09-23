@@ -179,11 +179,12 @@ function CreatePost() {
 						<Button
 							type="submit"
 							variant="contained"
-							color="warning"
 							sx={{
 								textTransform: "none",
 								mt: "15px",
 								fontSize: "18px",
+								background:
+									"linear-gradient(108.51deg, #F219A1 53.69%, #AD0CF8 100.22%, #FE007E 100.23%)",
 							}}
 						>
 							Create Post
