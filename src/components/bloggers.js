@@ -14,7 +14,11 @@ const Bloggers = () => {
 				pl: "40px",
 				mt: "30px",
 				maxHeight: "50vh",
-				background: "#9A0F98",
+				background:
+					" url(frosted-glass-texture-as-background-frosted-glass-texture-as-background-interior-design-decoration-111091129.jpg), linear-gradient(253.09deg, rgba(217, 217, 217, 0.15) -7.53%, rgba(217, 217, 217, 0) 97.04%)",
+				backdropFilter: "blur(50px)",
+				overflow: "hidden",
+				border: "0.5px solid #E2E2E21D",
 				color: "#fff",
 			}}
 		>
@@ -37,7 +41,7 @@ const Bloggers = () => {
 							width: "12px",
 						},
 						"&::-webkit-scrollbar-thumb": {
-							background: "#160040",
+							background: "rgba(221, 217, 219, 0.5)",
 							borderRadius: "5px",
 						},
 					}}
