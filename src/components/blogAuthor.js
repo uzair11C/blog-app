@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Stack, Paper, Typography, Box } from "@mui/material";
 import { AllPosts } from "../contexts/allPostsContext";
 import { AllUsers } from "../contexts/allUsersContext";
