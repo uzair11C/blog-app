@@ -3,7 +3,7 @@ import {
 	Button,
 	Typography,
 	Stack,
-	TextField,
+	OutlinedInput,
 	Container,
 	Backdrop,
 	CircularProgress,
@@ -62,12 +62,12 @@ function EditPost() {
 	const editPost = async (values) => {
 		try {
 			setOpen(true);
-			const res = await axios.patch(
+			await axios.patch(
 				`https://jsonplaceholder.typicode.com/users/${currentPost.id}`,
 				values
 			);
 
-			toast.success(`Post Edited with success code ${res.status}`);
+			toast.success(`Post Edited Successfully`);
 			setOpen(false);
 			setTimeout(() => {
 				navigate("/user/posts", { replace: true });
@@ -121,22 +121,30 @@ function EditPost() {
 						>
 							Title:
 						</Typography>
-						<TextField
+						<OutlinedInput
 							id="title"
 							placeholder="Post Title"
-							style={{ marginBottom: "40px" }}
 							value={formik.values.title}
 							onChange={formik.handleChange}
 							name="title"
 							onBlur={formik.handleBlur}
-							sx={{
-								"& .MuiOutlinedInput-root fieldset": {
+							variant="outlined"
+							inputProps={{
+								style: {
 									border: "2px solid #C4C4C4",
+									color: "#fff",
 									borderColor:
 										formik.touched.title && formik.errors.title
 											? "#ff0000"
 											: "#C4C4C4",
+									borderRadius: "5px",
 								},
+								"&:hover": {
+									outline: "none",
+									borderColor: "transparent",
+								},
+							}}
+							sx={{
 								"& ::-webkit-input-placeholder": {
 									color: "#fff",
 								},
@@ -163,27 +171,43 @@ function EditPost() {
 						>
 							Body:
 						</Typography>
-						<TextField
+						<OutlinedInput
 							id="body"
 							multiline
-							inputProps={{ style: { color: "#fff" } }}
 							placeholder="Post Body"
 							rows={7}
 							value={formik.values.body}
 							onChange={formik.handleChange}
-							style={{ marginBottom: "15px" }}
 							name="body"
+							dense={false}
 							onBlur={formik.handleBlur}
+							inputProps={{
+								style: {},
+							}}
 							sx={{
-								"& .MuiOutlinedInput-root fieldset": {
-									border: "2px solid #C4C4C4",
-									borderColor:
-										formik.touched.body && formik.errors.body
-											? "#ff0000"
-											: "#C4C4C4",
-								},
+								border: "2px solid #C4C4C4",
+								color: "#fff",
+								borderColor:
+									formik.touched.body && formik.errors.body
+										? "#ff0000"
+										: "#C4C4C4",
+								borderRadius: "5px",
+								// "& .MuiOutlinedInput-root": {
+								// 	border: "2px solid #C4C4C4",
+								// 	color: "#fff",
+								// 	borderColor:
+								// 		formik.touched.title && formik.errors.title
+								// 			? "#ff0000"
+								// 			: "#C4C4C4",
+								// 	borderRadius: "5px",
+								// 	// },
+								// },
 								"& ::-webkit-input-placeholder": {
 									color: "#fff",
+								},
+								"& .MuiOutlinedInput-root:hover": {
+									outline: "none",
+									borderColor: "transparent",
 								},
 							}}
 						/>
