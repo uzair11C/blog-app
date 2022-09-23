@@ -73,10 +73,6 @@ const PostsComp = () => {
 										textDecoration: "none",
 										color: "#fff",
 										opacity: "0.7",
-										// "&:hover": {
-										// 	color: "#160040",
-										// 	transition: "0.3s ease-in-out",
-										// },
 									}}
 								>
 									<Link
@@ -89,7 +85,7 @@ const PostsComp = () => {
 							))}
 					</Stack>
 				</Box>
-				{/* <Stack justifyContent={"center"} alignItems={"center"}>
+				<Stack justifyContent={"center"} alignItems={"center"}>
 					<Pagination
 						count={2}
 						//variant="outlined"
@@ -98,9 +94,18 @@ const PostsComp = () => {
 						sx={{
 							// background: "#2E0249",
 							mb: "50px",
+							"& .MuiPaginationItem-text": {
+								color: "#fff",
+							},
+							"& .MuiPaginationItem-root.Mui-selected": {
+								background:
+									"linear-gradient(108.51deg, #F219A1 53.69%, #AD0CF8 100.22%, #FE007E 100.23%)",
+							},
 						}}
+						hidePrevButton
+						hideNextButton
 					/>
-				</Stack> */}
+				</Stack>
 			</Card>
 		</>
 	);
