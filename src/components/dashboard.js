@@ -33,13 +33,14 @@ const Dashboard = () => {
 							alignItems: "stretch",
 						}}
 					>
-						<Button
+						{/* <Button
 							variant="contained"
 							color="secondary"
 							sx={{
 								fontSize: "18px",
 								textTransform: "none",
-								background: "#1597BB",
+								background:
+									"linear-gradient(108.51deg, #F219A1 53.69%, #AD0CF8 100.22%, #FE007E 100.23%)",
 							}}
 						>
 							<Link
@@ -48,7 +49,7 @@ const Dashboard = () => {
 							>
 								{CapitalizeFirstLetter("Create a new post")}
 							</Link>
-						</Button>
+						</Button> */}
 						<Bloggers />
 					</Grid>
 				</Grid>
