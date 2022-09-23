@@ -28,7 +28,7 @@ const Appbar = () => {
 	};
 
 	return (
-		<AppBar position="static" sx={{ background: "#160040" }}>
+		<AppBar position="static" sx={{ background: "#16213E" }}>
 			<Container maxWidth="xl">
 				<Toolbar>
 					<Typography
@@ -80,13 +80,15 @@ const Appbar = () => {
 								<Typography
 									variant="body1"
 									textAlign="center"
-									sx={{
-										textDecoration: "none",
-										"&:hover": {
-											color: "#9A0680",
-											transition: "0.3s ease-in-out",
-										},
-									}}
+									sx={
+										{
+											// textDecoration: "none",
+											// "&:hover": {
+											// 	color: "#9A0680",
+											// 	transition: "0.3s ease-in-out",
+											// },
+										}
+									}
 								>
 									<Link
 										className="link"
@@ -102,10 +104,10 @@ const Appbar = () => {
 									variant="body1"
 									sx={{
 										textDecoration: "none",
-										"&:hover": {
-											color: "#9A0680",
-											transition: "0.3s ease-in-out",
-										},
+										// "&:hover": {
+										// 	color: "#9A0680",
+										// 	transition: "0.3s ease-in-out",
+										// },
 									}}
 									textAlign="center"
 								>
@@ -162,10 +164,10 @@ const Appbar = () => {
 								display: "block",
 								margin: "10px",
 								textDecoration: "none",
-								"&:hover": {
-									color: "#9A0680",
-									transition: "0.3s ease-in-out",
-								},
+								// "&:hover": {
+								// 	color: "#9A0680",
+								// 	transition: "0.3s ease-in-out",
+								// },
 							}}
 						>
 							<Link
@@ -186,10 +188,10 @@ const Appbar = () => {
 								display: "block",
 								margin: "10px",
 								textDecoration: "none",
-								"&:hover": {
-									color: "#9A0680",
-									transition: "0.3s ease-in-out",
-								},
+								// 	"&:hover": {
+								// 		color: "#9A0680",
+								// 		transition: "0.3s ease-in-out",
+								// 	},
 							}}
 						>
 							<Link
@@ -199,17 +201,6 @@ const Appbar = () => {
 								My Posts
 							</Link>
 						</Typography>
-						{/* <Typography
-                variant='h5' component='h5' 
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block',margin:'10px', textDecoration:'none' }}
-              >
-                <Link 
-                  to='/contact'
-                >
-                  Contact
-                </Link>
-              </Typography> */}
 					</Box>
 					<Box sx={{ pr: 2, whiteSpace: "nowrap" }}>
 						<Typography variant="h5" component="div">
@@ -225,6 +216,9 @@ const Appbar = () => {
 							pl: "25px",
 							borderRadius: "7px",
 							fontWeight: 600,
+							"&:hover": {
+								backgroundColor: "#FF0000",
+							},
 						}}
 						onClick={() => {
 							setCurrentUser({
