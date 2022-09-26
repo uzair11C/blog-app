@@ -185,7 +185,7 @@ function MyPosts() {
 					<TableBody>
 						<Box
 							sx={{
-								maxHeight: "56vh",
+								maxHeight: "55vh",
 								overflow: "auto",
 								"&::-webkit-scrollbar": {
 									width: "12px",
