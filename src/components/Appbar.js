@@ -120,6 +120,26 @@ const Appbar = () => {
 								</Typography>
 							</MenuItem>
 							<MenuItem onClick={handleCloseNavMenu}>
+								<Typography
+									variant="body1"
+									sx={{
+										textDecoration: "none",
+										// "&:hover": {
+										// 	color: "#9A0680",
+										// 	transition: "0.3s ease-in-out",
+										// },
+									}}
+									textAlign="center"
+								>
+									<Link
+										style={{ color: "inherit", textDecoration: "inherit" }}
+										to={`/pagination-api`}
+									>
+										Pagination
+									</Link>
+								</Typography>
+							</MenuItem>
+							<MenuItem onClick={handleCloseNavMenu}>
 								{/* <Typography variant='body1' sx={{textDecoration:'none'}} textAlign="center">
                     <Link 
                       to='/contact'
@@ -188,10 +208,6 @@ const Appbar = () => {
 								display: "block",
 								margin: "10px",
 								textDecoration: "none",
-								// 	"&:hover": {
-								// 		color: "#9A0680",
-								// 		transition: "0.3s ease-in-out",
-								// 	},
 							}}
 						>
 							<Link
@@ -199,6 +215,25 @@ const Appbar = () => {
 								to={`/user/posts`}
 							>
 								My Posts
+							</Link>
+						</Typography>
+						<Typography
+							variant="h5"
+							component="h5"
+							onClick={handleCloseNavMenu}
+							sx={{
+								my: 2,
+								color: "white",
+								display: "block",
+								margin: "10px",
+								textDecoration: "none",
+							}}
+						>
+							<Link
+								style={{ color: "inherit", textDecoration: "inherit" }}
+								to={`/pagination-api`}
+							>
+								API Pagination
 							</Link>
 						</Typography>
 					</Box>
