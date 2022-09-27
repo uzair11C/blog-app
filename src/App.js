@@ -9,6 +9,7 @@ import CreatePost from "./components/createPost";
 import EditPost from "./components/editPost";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import PaginationDemo from "./components/paginationDemo";
 
 function App() {
 	const navigate = useNavigate();
@@ -30,6 +31,7 @@ function App() {
 				<Route exact path="/user/posts/:id" element={<BlogPage />} />
 				<Route exact path="/create-post" element={<CreatePost />} />
 				<Route exact path="/edit-post/:id" element={<EditPost />} />
+				<Route exact path="/pagination-api" element={<PaginationDemo />} />
 			</Routes>
 			<ToastContainer
 				position="top-right"
