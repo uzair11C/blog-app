@@ -6,6 +6,9 @@ import {
 	Stack,
 	Avatar,
 	Pagination,
+	Select,
+	FormControl,
+	MenuItem,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Appbar from "./Appbar";
@@ -13,18 +16,25 @@ import axios from "axios";
 
 const PaginationDemo = () => {
 	const [page, setPage] = useState(1);
-	const [rusers, setRusers] = useState([]);
+	const [rusers, setRusers] = useState({});
+	const [perPage, setPerPage] = useState(6);
 
-	const fetchRusers = async () => {
-		const res = await axios.get(`https://reqres.in/api/users?page=${page}`);
+	const fetchRusers = async (page, perPage) => {
+		const res = await axios.get(
+			`https://reqres.in/api/users?page=${page}&per_page=${perPage}`
+		);
 		const data = await res.data;
-		setRusers(data.data);
-		console.log(rusers);
+		console.log(data);
+		setRusers(data);
+	};
+
+	const handleChange = (event) => {
+		setPerPage(event.target.value);
 	};
 
 	useEffect(() => {
-		fetchRusers();
-	}, [page]);
+		fetchRusers(page, perPage);
+	}, [page, perPage]);
 
 	return (
 		<>
@@ -54,7 +64,7 @@ const PaginationDemo = () => {
 						border: "0.5px solid #E2E2E21D",
 						color: "#fff",
 						borderRadius: "15px",
-						width: "40vw",
+						width: "45vw",
 					}}
 				>
 					<Typography
@@ -66,95 +76,138 @@ const PaginationDemo = () => {
 					>
 						All Req-Res Users:
 					</Typography>
-					<Box
-						sx={{
-							p: "30px",
-							height: "43vh",
-							overflow: "auto",
-							"&::-webkit-scrollbar": {
-								width: "12px",
-							},
-							"&::-webkit-scrollbar-thumb": {
-								background: "rgba(221, 217, 219, 0.5)",
-								borderRadius: "5px",
-							},
-						}}
+					<Stack
+						direction="column"
+						justifyContent="center"
+						alignItems="stretch"
 					>
-						{rusers &&
-							rusers.map((user) => (
-								<Stack
-									direction="row"
-									justifyContent="flex-start"
-									alignItems="center"
-									spacing={3}
-									key={user.id}
-									sx={{
-										mt: "15px",
-										mb: "15px",
-									}}
-								>
-									<Avatar
-										alt={user.first_name}
-										src={user.avatar}
-										sx={{
-											width: "50px",
-											height: "50px",
-										}}
-									/>
-									<Stack
-										direction="column"
-										justifyContent="flex-start"
-										alignItems="flex-start"
-									>
-										<Typography
-											sx={{
-												letterSpacing: "0.1rem",
-												color: "#fff",
-												opacity: "0.7",
-												fontSize: "16px",
-											}}
-										>
-											{user.first_name} {user.last_name}
-										</Typography>
-										<Typography
-											sx={{
-												letterSpacing: "0.1rem",
-												color: "#fff",
-												opacity: "0.7",
-												fontSize: "12px",
-											}}
-										>
-											{user.email}
-										</Typography>
-									</Stack>
-								</Stack>
-							))}
-					</Box>
-					<Box
-						sx={{
-							display: "flex",
-							flexDirection: "column",
-							justifyContent: "center",
-							alignItems: "center",
-						}}
-					>
-						<Pagination
-							size="large"
-							count={2}
-							onChange={(e, value) => {
-								setPage(value);
-							}}
+						<Box
 							sx={{
-								"& .MuiPaginationItem-text": {
-									color: "#fff",
+								p: "30px",
+								height: "40vh",
+								overflow: "auto",
+								"&::-webkit-scrollbar": {
+									width: "12px",
 								},
-								"& .MuiPaginationItem-root.Mui-selected": {
-									background:
-										"linear-gradient(108.51deg, #F219A1 53.69%, #AD0CF8 100.22%, #FE007E 100.23%)",
+								"&::-webkit-scrollbar-thumb": {
+									background: "rgba(221, 217, 219, 0.5)",
+									borderRadius: "5px",
 								},
 							}}
-						/>
-					</Box>
+						>
+							{rusers.data &&
+								rusers.data.map((user) => (
+									<Stack
+										direction="row"
+										justifyContent="flex-start"
+										alignItems="center"
+										spacing={3}
+										key={user.id}
+										sx={{
+											mt: "15px",
+											mb: "15px",
+										}}
+									>
+										<Avatar
+											alt={user.first_name}
+											src={user.avatar}
+											sx={{
+												width: "50px",
+												height: "50px",
+											}}
+										/>
+										<Stack
+											direction="column"
+											justifyContent="flex-start"
+											alignItems="flex-start"
+										>
+											<Typography
+												sx={{
+													letterSpacing: "0.1rem",
+													color: "#fff",
+													opacity: "0.7",
+													fontSize: "16px",
+												}}
+											>
+												{user.first_name} {user.last_name}
+											</Typography>
+											<Typography
+												sx={{
+													letterSpacing: "0.1rem",
+													color: "#fff",
+													opacity: "0.7",
+													fontSize: "12px",
+												}}
+											>
+												{user.email}
+											</Typography>
+										</Stack>
+									</Stack>
+								))}
+						</Box>
+						<Box
+							sx={{
+								display: "flex",
+								flexDirection: "row",
+								justifyContent: "center",
+								alignItems: "center",
+								p: "20px",
+							}}
+						>
+							<Stack
+								direction="row"
+								justifyContent="flex-start"
+								alignItems="stretch"
+								sx={{ mb: "10px" }}
+							>
+								<Typography>Per-Page: &nbsp;&nbsp;</Typography>
+								<FormControl
+									sx={{
+										maxHeight: "15px",
+										minWidth: 75,
+										color: "black",
+									}}
+									size="small"
+								>
+									<Select
+										labelId="demo-simple-select-autowidth-label"
+										id="demo-simple-select-autowidth"
+										value={perPage}
+										onChange={handleChange}
+										sx={{
+											maxHeight: "30px",
+											fontSize: "14px",
+											color: "#858688",
+											background: "#FFFFFF",
+											borderColor: "1px solid rgba(133, 134, 136, 0.16)",
+											".MuiSelect-icon": { color: "#858688" },
+										}}
+									>
+										<MenuItem value={2}>Two</MenuItem>
+										<MenuItem value={4}>Four</MenuItem>
+										<MenuItem value={6}>Six</MenuItem>
+									</Select>
+								</FormControl>
+							</Stack>
+							<Pagination
+								size="large"
+								count={rusers.total_pages}
+								//page={page}
+								onChange={(e, value) => {
+									setPage(value);
+								}}
+								sx={{
+									"& .MuiPaginationItem-text": {
+										color: "#fff",
+									},
+									"& .MuiPaginationItem-root.Mui-selected": {
+										background:
+											"linear-gradient(108.51deg, #F219A1 53.69%, #AD0CF8 100.22%, #FE007E 100.23%)",
+									},
+								}}
+							/>
+						</Box>
+					</Stack>
 				</Card>
 			</Container>
 		</>
