@@ -28,6 +28,7 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import PropTypes from "prop-types";
+
 function TablePaginationActions(props) {
 	const theme = useTheme();
 	const { count, page, rowsPerPage, onPageChange } = props;
