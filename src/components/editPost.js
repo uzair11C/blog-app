@@ -139,7 +139,7 @@ function EditPost() {
 											: "#C4C4C4",
 									borderRadius: "5px",
 								},
-								"&:hover": {
+								"input:hover": {
 									outline: "none",
 									borderColor: "transparent",
 								},
@@ -179,7 +179,7 @@ function EditPost() {
 							value={formik.values.body}
 							onChange={formik.handleChange}
 							name="body"
-							dense={false}
+							// dense={false}
 							onBlur={formik.handleBlur}
 							inputProps={{
 								style: {},
