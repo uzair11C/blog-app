@@ -9,32 +9,67 @@ import {
 	Select,
 	FormControl,
 	MenuItem,
+	IconButton,
+	Backdrop,
+	CircularProgress,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Appbar from "./Appbar";
+import { Delete } from "@mui/icons-material";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const PaginationDemo = () => {
 	const [page, setPage] = useState(1);
 	const [rusers, setRusers] = useState({});
 	const [perPage, setPerPage] = useState(6);
+	const [open, setOpen] = useState(false);
 
 	const fetchRusers = async (page, perPage) => {
 		const res = await axios.get(
 			`https://reqres.in/api/users?page=${page}&per_page=${perPage}`
 		);
 		const data = await res.data;
-		console.log(data);
 		setRusers(data);
 	};
 
 	const handleChange = (event) => {
-		setPerPage(event.target.value);
+		setPerPage(parseInt(event.target.value));
+		setPage(1);
+		fetchRusers(page, perPage);
+	};
+
+	const deleteUser = async (id) => {
+		try {
+			setOpen(true);
+			await axios.delete(`https://reqres.in/api/users/${id}`);
+			setOpen(false);
+			toast.success(`User Deleted Successfully!`);
+			setPage(1);
+		} catch (error) {
+			setOpen(false);
+			toast.error(error.message, {
+				position: "top-right",
+				autoClose: 2500,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+		}
 	};
 
 	useEffect(() => {
 		fetchRusers(page, perPage);
 	}, [page, perPage]);
+
+	// useEffect(() => {
+	// 	setPage(1);
+	// 	fetchRusers(page, perPage);
+	// 	console.log(rusers.data);
+	// }, [perPage]);
 
 	return (
 		<>
@@ -142,6 +177,16 @@ const PaginationDemo = () => {
 												{user.email}
 											</Typography>
 										</Stack>
+										<IconButton
+											aria-label="delete"
+											size="large"
+											sx={{ color: "#FF0000" }}
+											onClick={() => {
+												deleteUser(user.id);
+											}}
+										>
+											<Delete fontSize="medium" />
+										</IconButton>
 									</Stack>
 								))}
 						</Box>
@@ -192,10 +237,11 @@ const PaginationDemo = () => {
 							<Pagination
 								size="large"
 								count={rusers.total_pages}
-								//page={page}
+								page={page}
 								onChange={(e, value) => {
 									setPage(value);
 								}}
+								row
 								sx={{
 									"& .MuiPaginationItem-text": {
 										color: "#fff",
@@ -210,6 +256,21 @@ const PaginationDemo = () => {
 					</Stack>
 				</Card>
 			</Container>
+			<Backdrop
+				sx={{
+					color: "#fff",
+					margin: 0,
+					zIndex: (theme) => theme.zIndex.drawer + 1,
+				}}
+				open={open}
+			>
+				<CircularProgress
+					sx={{
+						color: "#1597BB",
+					}}
+					disableShrink
+				/>
+			</Backdrop>
 		</>
 	);
 };
