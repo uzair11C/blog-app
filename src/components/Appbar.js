@@ -31,6 +31,7 @@ const Appbar = () => {
 		<AppBar position="static" sx={{ background: "#16213E" }}>
 			<Container maxWidth="xl">
 				<Toolbar>
+					{/* This is for desktop view */}
 					<Typography
 						variant="h5"
 						component="div"
